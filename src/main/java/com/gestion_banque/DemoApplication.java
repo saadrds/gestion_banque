@@ -33,6 +33,7 @@ public class DemoApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+<<<<<<< HEAD
 		
 		/*Agence agence1 = new Agence("Sidi Bouzid");
 		agenceRep.save(agence1);
@@ -46,6 +47,13 @@ public class DemoApplication implements CommandLineRunner {
 		//cl.save(safae);
 		cl.save(saad);
 		cl.save(safae);*/
+=======
+		Client saad = new Client("saad", "rouddasse", "HH230550", "0649015637",df.parse("05/07/1997"));
+		Client safae = new Client("safae", "El Himer", "HH430823", "0649481722", df.parse("24/07/1999"));
+		cl.save(saad);
+		cl.save(safae);
+		//cl.save(new Client("khadija", "El Atri", "HH40123", "061234566", df.parse("21/03/1979")));
+>>>>>>> branch 'master' of https://github.com/saadrds/gestion_banque.git
 		
 		//agenceRep.findOne(null)
 		//Client hamza = new Client("hamza", "habibou", "HH230550", "mdp123","saadrds@gmail.com","0649015637",df.parse("05/07/1997"),a1);

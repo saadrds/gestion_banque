@@ -12,11 +12,16 @@ public class Admin implements Serializable {
 	@Id @GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid")
 	 private String id_Admin;
+<<<<<<< HEAD
 	  public Admin() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	private String Mdp;
+=======
+	  private String Mdp;
+	  
+>>>>>>> branch 'master' of https://github.com/saadrds/gestion_banque.git
 	public String getId_Admin() {
 		return id_Admin;
 	}
