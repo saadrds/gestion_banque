@@ -2,10 +2,21 @@ package com.gestion_banque.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+import org.hibernate.annotations.GenericGenerator;
+@Entity
 public class Admin implements Serializable {
-	
+	@Id @GeneratedValue(generator="system-uuid")
+	@GenericGenerator(name="system-uuid", strategy = "uuid")
 	 private String id_Admin;
-	  private String Mdp;
+	  public Admin() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	private String Mdp;
 	public String getId_Admin() {
 		return id_Admin;
 	}

@@ -7,5 +7,4 @@ import com.gestion_banque.entities.Client;
 public interface ClientRepository extends JpaRepository<Client, String>{
 	
 	
-
 }

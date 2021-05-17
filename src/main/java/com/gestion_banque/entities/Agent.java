@@ -1,10 +1,13 @@
 package com.gestion_banque.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -15,19 +18,28 @@ public class Agent implements Serializable {
 	@Id @GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid")
 	 private String id_Agent;
-	  private String Prenom;
-	  private String Nom;
-	  private String id_agence;
+	  private String prenom;
+	  private String nom;
+	  private String email;
+	  private String mdp;
 	  
-	  @OneToOne(mappedBy = "agence")
+	  @ManyToOne
 	  private Agence agence;
 	  
-	public Agent(String id_Agent, String prenom, String nom, String id_agence) {
+	  @OneToMany(mappedBy = "agent")
+	  private Collection<Client> clients;
+	  
+	public Agent( String prenom, String nom,String email, String mdp, Agence agence) {
 		super();
-		this.id_Agent = id_Agent;
-		Prenom = prenom;
-		Nom = nom;
-		this.id_agence = id_agence;
+		this.prenom = prenom;
+		this.nom = nom;
+		this.email = email;
+		this.mdp = mdp;
+		this.agence = agence;
+	}
+	public Agent() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	public String getId_Agent() {
 		return id_Agent;
@@ -36,22 +48,29 @@ public class Agent implements Serializable {
 		this.id_Agent = id_Agent;
 	}
 	public String getPrenom() {
-		return Prenom;
+		return prenom;
 	}
 	public void setPrenom(String prenom) {
-		Prenom = prenom;
+		this.prenom = prenom;
 	}
 	public String getNom() {
-		return Nom;
+		return nom;
 	}
 	public void setNom(String nom) {
-		Nom = nom;
+		this.nom = nom;
 	}
-	public String getId_agence() {
-		return id_agence;
+	public String getEmail() {
+		return email;
 	}
-	public void setId_agence(String id_agence) {
-		this.id_agence = id_agence;
+	public void setEmail(String email) {
+		this.email = email;
 	}
+	public String getMdp() {
+		return mdp;
+	}
+	public void setMdp(String mdp) {
+		this.mdp = mdp;
+	}
+	
 
 }

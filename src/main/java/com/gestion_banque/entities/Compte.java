@@ -6,6 +6,7 @@ import java.util.Collection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -19,7 +20,8 @@ public class Compte implements Serializable{
 	private int rib;
 	private String id_Agence;
 	private String id_Client;
-	@OneToOne(mappedBy = "compte")
+	private double solde;
+	@ManyToOne
 	  private Client client;
 	
 	public String getId_Compte() {
@@ -46,12 +48,19 @@ public class Compte implements Serializable{
 	public void setId_Client(String id_Client) {
 		this.id_Client = id_Client;
 	}
-	public Compte(String id_Compte, int rib, String id_Agence, String id_Client) {
+	public Compte(String id_Compte, int rib, String id_Agence, String id_Client, double solde) {
 		super();
 		this.id_Compte = id_Compte;
 		this.rib = rib;
 		this.id_Agence = id_Agence;
 		this.id_Client = id_Client;
+		this.solde = solde;
+	}
+	public double getSolde() {
+		return solde;
+	}
+	public void setSolde(double solde) {
+		this.solde = solde;
 	}
 
 }
