@@ -20,19 +20,11 @@ public class Compte implements Serializable{
 	private int rib;
 	private String id_Agence;
 	private String id_Client;
-<<<<<<< HEAD
-	private double solde;
 	@ManyToOne
-=======
-	private int solde;
-	public int getSolde() {
-		return solde;
-	}
-	public void setSolde(int solde) {
-		this.solde = solde;
-	}
+	private double solde;
+
+
 	@OneToOne(mappedBy = "compte")
->>>>>>> branch 'master' of https://github.com/saadrds/gestion_banque.git
 	  private Client client;
 	
 	public String getId_Compte() {
@@ -61,28 +53,24 @@ public class Compte implements Serializable{
 	public void setId_Client(String id_Client) {
 		this.id_Client = id_Client;
 	}
-<<<<<<< HEAD
-	public Compte(String id_Compte, int rib, String id_Agence, String id_Client, double solde) {
-=======
-	
+
 	
 	public Compte(String id_Compte, int rib, String id_Agence, String id_Client, int solde) {
->>>>>>> branch 'master' of https://github.com/saadrds/gestion_banque.git
+
 		super();
 		this.id_Compte = id_Compte;
 		this.rib = rib;
 		this.id_Agence = id_Agence;
 		this.id_Client = id_Client;
 		this.solde = solde;
-<<<<<<< HEAD
+
 	}
 	public double getSolde() {
 		return solde;
 	}
 	public void setSolde(double solde) {
 		this.solde = solde;
-=======
->>>>>>> branch 'master' of https://github.com/saadrds/gestion_banque.git
+
 	}
 	
 

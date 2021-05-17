@@ -17,18 +17,14 @@ public class Agent implements Serializable {
 	
 	@Id @GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid")
-<<<<<<< HEAD
 	 private String id_Agent;
 	  private String prenom;
 	  private String nom;
 	  private String email;
 	  private String mdp;
-=======
-	  private String id_Agent;
 	  private String Prenom;
 	  private String Nom;
 	  private String id_agence;
->>>>>>> branch 'master' of https://github.com/saadrds/gestion_banque.git
 	  
 	  @ManyToOne
 	  private Agence agence;
