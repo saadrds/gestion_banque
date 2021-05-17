@@ -26,9 +26,9 @@ public class DemoApplication implements CommandLineRunner {
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		Client saad = new Client("saad", "rouddasse", "HH230550", "0649015637",df.parse("05/07/1997"));
 		Client safae = new Client("safae", "El Himer", "HH430823", "0649481722", df.parse("24/07/1999"));
-		//cl.save(saad);
-		//cl.save(safae);
-		cl.save(new Client("khadija", "El Atri", "HH40123", "061234566", df.parse("21/03/1979")));
+		cl.save(saad);
+		cl.save(safae);
+		//cl.save(new Client("khadija", "El Atri", "HH40123", "061234566", df.parse("21/03/1979")));
 		
 		cl.findAll().forEach(c -> {
 			System.out.println(c.getNom());

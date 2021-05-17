@@ -1,10 +1,12 @@
 package com.gestion_banque.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -24,10 +26,10 @@ public class Client implements Serializable {
   private String tel;
   @Temporal(TemporalType.DATE)
   private Date dateCreation;
-  @OneToMany(mappedBy = "client")
-  private Collection<Compte> comptes;
+  @OneToMany(mappedBy = "clients",fetch = FetchType.EAGER)
+  private Collection<Compte> comptes = new ArrayList<>();
   //constructors 
-
+//added a comment
 public Client() {
 	super();
 	// TODO Auto-generated constructor stub
