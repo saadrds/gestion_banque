@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -22,14 +23,12 @@ public class Agent implements Serializable {
 	  private String nom;
 	  private String email;
 	  private String mdp;
-	  private String Prenom;
-	  private String Nom;
 	  private String id_agence;
 	  
 	  @ManyToOne
 	  private Agence agence;
 	  
-	  @OneToMany(mappedBy = "agent")
+	  @OneToMany(mappedBy = "agent",fetch = FetchType.EAGER)
 	  private Collection<Client> clients;
 	  
 	public Agent( String prenom, String nom,String email, String mdp, Agence agence) {
@@ -39,6 +38,24 @@ public class Agent implements Serializable {
 		this.email = email;
 		this.mdp = mdp;
 		this.agence = agence;
+	}
+	public String getId_agence() {
+		return id_agence;
+	}
+	public void setId_agence(String id_agence) {
+		this.id_agence = id_agence;
+	}
+	public Agence getAgence() {
+		return agence;
+	}
+	public void setAgence(Agence agence) {
+		this.agence = agence;
+	}
+	public Collection<Client> getClients() {
+		return clients;
+	}
+	public void setClients(Collection<Client> clients) {
+		this.clients = clients;
 	}
 	public Agent() {
 		super();

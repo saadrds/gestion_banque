@@ -32,7 +32,8 @@ public class Client implements Serializable {
 
   @ManyToOne
   private Agent agent;
-  @OneToMany(mappedBy = "clients",fetch = FetchType.EAGER)
+  
+  @OneToMany(mappedBy = "client",fetch = FetchType.EAGER)
   private Collection<Compte> comptes = new ArrayList<>();
   //constructors 
 //added a comment

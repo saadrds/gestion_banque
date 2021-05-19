@@ -55,7 +55,7 @@ public class DemoApplication implements CommandLineRunner {
 
 		
 		agentRep.findByLastname("Atri").forEach(c -> {
-			System.out.println(c.getEmail());
+			System.out.println(c.getClients());
 		});
 	}
 

@@ -20,11 +20,9 @@ public class Compte implements Serializable{
 	private int rib;
 	private String id_Agence;
 	private String id_Client;
-	@ManyToOne
 	private double solde;
-
-
-	@OneToOne(mappedBy = "compte")
+	
+	@ManyToOne
 	  private Client client;
 	
 	public String getId_Compte() {
