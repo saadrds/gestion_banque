@@ -18,9 +18,11 @@ import org.springframework.web.filter.CorsFilter;
 import com.gestion_banque.dao.AgenceRespository;
 import com.gestion_banque.dao.AgentRespository;
 import com.gestion_banque.dao.ClientRepository;
+import com.gestion_banque.dao.CompteRespository;
 import com.gestion_banque.entities.Agence;
 import com.gestion_banque.entities.Agent;
-import com.gestion_banque.entities.Client;	
+import com.gestion_banque.entities.Client;
+import com.gestion_banque.entities.Compte;	
 
 @SpringBootApplication
 public class DemoApplication implements CommandLineRunner {
@@ -32,6 +34,9 @@ public class DemoApplication implements CommandLineRunner {
 	@Autowired
 	private AgentRespository agentRep;
 	
+	@Autowired
+	private CompteRespository compteRep;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}
@@ -40,7 +45,7 @@ public class DemoApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 
-		/*Agence agence1 = new Agence("Sidi Bouzid");
+		Agence agence1 = new Agence("Sidi Bouzid");
 		agenceRep.save(agence1);
 		
 		Agent a1 = new Agent( "Khadija", "Atri","atri.kh@gmail.com", "123456",agence1);
@@ -51,7 +56,11 @@ public class DemoApplication implements CommandLineRunner {
 		//cl.save(saad);
 		//cl.save(safae);
 		cl.save(saad);
-		cl.save(safae);*/
+		cl.save(safae);
+		Compte compte = new Compte(123456, 100,saad);
+		Compte compte2 = new Compte(223456, 300,saad);
+		compteRep.save(compte);
+		compteRep.save(compte2);
 
 
 		//cl.save(new Client("khadija", "El Atri", "HH40123", "061234566", df.parse("21/03/1979")));
