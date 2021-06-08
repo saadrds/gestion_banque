@@ -13,6 +13,8 @@ import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Agent implements Serializable {
 	
@@ -29,6 +31,7 @@ public class Agent implements Serializable {
 	  private Agence agence;
 	  
 	  @OneToMany(mappedBy = "agent",fetch = FetchType.EAGER)
+	  @JsonIgnore
 	  private Collection<Client> clients;
 	  
 	public Agent( String prenom, String nom,String email, String mdp, Agence agence) {

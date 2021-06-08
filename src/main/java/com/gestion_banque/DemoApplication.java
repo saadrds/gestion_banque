@@ -2,19 +2,25 @@ package com.gestion_banque;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 import com.gestion_banque.dao.AgenceRespository;
 import com.gestion_banque.dao.AgentRespository;
 import com.gestion_banque.dao.ClientRepository;
 import com.gestion_banque.entities.Agence;
 import com.gestion_banque.entities.Agent;
-import com.gestion_banque.entities.Client;
+import com.gestion_banque.entities.Client;	
 
 @SpringBootApplication
 public class DemoApplication implements CommandLineRunner {
@@ -58,5 +64,26 @@ public class DemoApplication implements CommandLineRunner {
 			System.out.println(c.getClients());
 		});
 	}
+	
+	/*@Bean
+	public CorsFilter corsFilter() {
+		CorsConfiguration corsConfiguration= new CorsConfiguration();
+		corsConfiguration.setAllowCredentials(true);
+		corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+		corsConfiguration.setAllowedHeaders(Arrays.asList("Origin","Access-Control-Allow-Origin","Content-Type","Accept",
+				"Authorization","Origin, Accept","X-Requested-With","Access-Control-Request-Method",
+				"Access-Control-Request-Headers"));
+		corsConfiguration.setExposedHeaders(Arrays.asList("Origin","Content-Type","Accept","Authorization",
+				"Access-Controll-Allow-Origin","Access-Controll-Allow-Origin","Access-Controll-Allow-Credentials"));
+		corsConfiguration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE","OPTIONS"));
+		UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
+		urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration);
+		return new CorsFilter(urlBasedCorsConfigurationSource);
+		
+		
+		
+		
+	}*/
+	
 
 }

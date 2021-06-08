@@ -48,6 +48,12 @@ public class Compte implements Serializable{
 		return id_Client;
 	}
 	
+	public Client getClient() {
+		return client;
+	}
+	public void setClient(Client client) {
+		this.client = client;
+	}
 	public void setId_Client(String id_Client) {
 		this.id_Client = id_Client;
 	}

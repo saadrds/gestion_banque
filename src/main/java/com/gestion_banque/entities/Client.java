@@ -9,12 +9,15 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Client implements Serializable {
@@ -29,8 +32,28 @@ public class Client implements Serializable {
   private String tel;
   @Temporal(TemporalType.DATE)
   private Date dateCreation;
+  public Agent getAgent() {
+	return agent;
+}
 
-  @ManyToOne
+
+
+public void setAgent(Agent agent) {
+	this.agent = agent;
+}
+
+public Collection<Compte> getComptes() {
+	return comptes;
+}
+
+
+
+public void setComptes(Collection<Compte> comptes) {
+	this.comptes = comptes;
+}
+
+@ManyToOne
+  @JoinColumn(name = "agent_id_agent")
   private Agent agent;
   
   @OneToMany(mappedBy = "client",fetch = FetchType.EAGER)

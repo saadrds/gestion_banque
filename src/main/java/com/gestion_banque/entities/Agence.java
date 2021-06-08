@@ -10,6 +10,8 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Agence  implements Serializable{
 	@Id @GeneratedValue(generator="system-uuid")
@@ -18,6 +20,7 @@ public class Agence  implements Serializable{
 	  private String adresse;
 	  
 	  @OneToMany(mappedBy = "agence")
+	  @JsonIgnore
 	  private Collection<Agent> agents;
 
 	public String getId_agence() {
