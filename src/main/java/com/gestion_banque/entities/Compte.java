@@ -12,6 +12,8 @@ import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Compte implements Serializable{
 	@Id @GeneratedValue(generator="system-uuid")
@@ -20,6 +22,7 @@ public class Compte implements Serializable{
 	private int rib;
 	private double solde;
 	
+	@JsonIgnore
 	@ManyToOne
 	  private Client client;
 	
