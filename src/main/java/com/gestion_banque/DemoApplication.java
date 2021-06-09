@@ -43,7 +43,7 @@ public class DemoApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+		/*DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 
 		Agence agence1 = new Agence("Sidi Bouzid");
 		agenceRep.save(agence1);
@@ -60,7 +60,7 @@ public class DemoApplication implements CommandLineRunner {
 		Compte compte = new Compte(123456, 100,saad);
 		Compte compte2 = new Compte(223456, 300,saad);
 		compteRep.save(compte);
-		compteRep.save(compte2);
+		compteRep.save(compte2);*/
 
 
 		//cl.save(new Client("khadija", "El Atri", "HH40123", "061234566", df.parse("21/03/1979")));

@@ -41,7 +41,6 @@ public class AgentRestRepository {
 	
 	@PostMapping("/loginAgent")
 	public Object loginAgent(@RequestBody Agent a){
-		System.out.println("bayo zaml");
 		String email = a.getEmail();
 		String mdp = a.getMdp();
 		List<Agent> agents = agentRep.findByEmailAndPassword(email, mdp);

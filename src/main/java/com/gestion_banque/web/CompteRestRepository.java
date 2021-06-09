@@ -37,18 +37,25 @@ public class CompteRestRepository {
 			return null;
 	}
 	
-	@PostMapping("/VerserSolde")
-	public Object verserSolde(@RequestBody Compte c){
-		String id = c.getId_compte();
-		double solde = c.getSolde();
-		Compte myCompte = compteRep.findById(id).orElse(null);
-		
+	@PostMapping("/verserSolde")
+	public Object verserSolde(@RequestBody Compte compte){
+		System.out.print("verser done");
+		double rib = compte.getRib();
+		double solde = compte.getSolde();
 		try {
+			List<Compte> comptes =  compteRep.findByRib(rib);
+			Compte myCompte = comptes.get(0);
 			myCompte.setSolde(myCompte.getSolde() + solde);
-			return "success";
+			compteRep.save(myCompte);
+			System.out.print("success");
+			System.out.print(rib);
+
+			return myCompte;
+			
 		}
 		catch(Exception e) {
-			return "error";
+			System.out.print(e.toString());
+			return null;
 		}
 			
 	}
