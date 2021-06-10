@@ -28,11 +28,12 @@ public class CompteRestRepository {
 	ClientRepository clientRep;
 	
 	
-	@RequestMapping(value = "/getClientComptes/{id}", method =RequestMethod.GET)
-	public Collection<Compte> getClientComptes(String id){
-		Client c = clientRep.findById(id).orElse(null);
-		if(c != null)
-			return c.getComptes();
+	@PostMapping("/getClientComptes")
+	public Collection<Compte> getClientComptes(@RequestBody Client client){
+		Client c = clientRep.findById(client.getId_client()).orElse(null);
+		if(c != null) {
+			System.out.print("entred");
+			return c.getComptes();}
 		else
 			return null;
 	}

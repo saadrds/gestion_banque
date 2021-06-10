@@ -32,8 +32,15 @@ public class ClientRestService {
 	}
 	
 	@PostMapping("/SaveClient")
-	public void SaveClients(@RequestBody Client c){
-		clientRep.save(c);
+	public Object SaveClients(@RequestBody Client c){
+		try{
+			clientRep.save(c);
+			return c;
+		}
+		catch(Exception e) {
+			return null;
+		}
+		
 	}
 	
 	@RequestMapping(value = "/getClient/{id}", method =RequestMethod.GET)
