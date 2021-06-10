@@ -15,6 +15,24 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 public class Compte implements Serializable{
 	@Id @GeneratedValue(generator="system-uuid")
+	private String codeCompte;
+	public Compte(String codeCompte, String id_Compte, int rib, String id_Agence, String id_Client, double solde,
+			Client client) {
+		super();
+		this.codeCompte = codeCompte;
+		this.id_Compte = id_Compte;
+		this.rib = rib;
+		this.id_Agence = id_Agence;
+		this.id_Client = id_Client;
+		this.solde = solde;
+		this.client = client;
+	}
+	public String getCodeCompte() {
+		return codeCompte;
+	}
+	public void setCodeCompte(String codeCompte) {
+		this.codeCompte = codeCompte;
+	}
 	@GenericGenerator(name="system-uuid", strategy = "uuid")
 	private String id_Compte;
 	private int rib;

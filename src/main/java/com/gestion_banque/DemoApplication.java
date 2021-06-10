@@ -18,17 +18,31 @@ import org.springframework.web.filter.CorsFilter;
 import com.gestion_banque.dao.AgenceRespository;
 import com.gestion_banque.dao.AgentRespository;
 import com.gestion_banque.dao.ClientRepository;
+import com.gestion_banque.dao.CompteRespository;
+import com.gestion_banque.dao.OperationRepository;
 import com.gestion_banque.entities.Agence;
 import com.gestion_banque.entities.Agent;
-import com.gestion_banque.entities.Client;	
+import com.gestion_banque.entities.Client;
+import com.gestion_banque.metier.OperationMetier;
+import com.gestion_banque.metier.OperationMetierImpl;	
 
 @SpringBootApplication
 public class DemoApplication implements CommandLineRunner {
+	
+	@Autowired
+	private ClientRepository clientRepository;
+	@Autowired
+	private CompteRespository compteRepository;
+	@Autowired
+	private OperationRepository operationRepository;
+	@Autowired
+	private OperationMetierImpl operationMetierImp;
+	@Autowired
+	private OperationMetier banqueMetier;
 	@Autowired
 	private ClientRepository cl;
 	@Autowired
 	private AgenceRespository agenceRep;
-	
 	@Autowired
 	private AgentRespository agentRep;
 	
