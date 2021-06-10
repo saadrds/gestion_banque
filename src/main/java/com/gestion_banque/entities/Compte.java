@@ -1,5 +1,4 @@
 package com.gestion_banque.entities;
-
 import java.io.Serializable;
 import java.util.Collection;
 
@@ -22,13 +21,6 @@ public class Compte implements Serializable{
 	private int rib;
 	private double solde;
 	
-	public Compte(String id_compte, int rib, double solde, Client client) {
-		super();
-		this.id_compte = id_compte;
-		this.rib = rib;
-		this.solde = solde;
-		this.client = client;
-	}
 	@JsonIgnore
 	@ManyToOne
 	  private Client client;

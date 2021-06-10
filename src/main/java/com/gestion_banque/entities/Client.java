@@ -27,7 +27,6 @@ public class Client implements Serializable {
   private String prenom;
   private String nom;
   private String cin;
-  private Long code;
   private String mdp;
   private String email;
   private String tel;
@@ -89,14 +88,6 @@ public Client(String nom, String email) {
 	this.email = email;
 }
 
-
-public Long getCode() {
-	return code;
-}
-
-public void setCode(Long code) {
-	this.code = code;
-}
 
 
 //getters and setters
