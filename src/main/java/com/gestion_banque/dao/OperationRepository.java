@@ -12,7 +12,7 @@ public interface OperationRepository extends JpaRepository<Operation, Long>{
     
     
     // solution 1 
-    @Query("select o from Operation o where o.compte.codeCompte=:x")
+    @Query("select o from Operation o where o.compte.id_compte=:x")
     public Page<Operation> getOperations( @Param("x") String code, Pageable pageable);
     
     // solution 2 

@@ -80,9 +80,9 @@ public class OperationMetierImpl implements OperationMetier {
     }
 
     @Override
-    public PageOperation getOperations( String codeCompte, int page, int size ) {
+    public PageOperation getOperations( String id_compte, int page, int size ) {
 
-        Page<Operation> ops = operationRepository.getOperations( codeCompte, PageRequest.of(page, size) );
+        Page<Operation> ops = operationRepository.getOperations( id_compte, PageRequest.of(page, size) );
 
         PageOperation pOp = new PageOperation();
         pOp.setOperations( ops.getContent() ); // get content retourne la liste

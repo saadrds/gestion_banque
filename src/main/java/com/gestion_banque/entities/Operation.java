@@ -24,7 +24,7 @@ private Date dateOperation;
 private double montant;
 
 @ManyToOne
-@JoinColumn(name="CODE_CPTE")
+@JoinColumn(name="compte")
 private Compte compte;
 
 

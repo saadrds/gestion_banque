@@ -44,16 +44,16 @@ public class BanqueController {
 	}
 	
 	@RequestMapping("/consulter")
-	public String consulter(Model model, String codeCompte, 
+	public String consulter(Model model, String id_compte, 
 			@RequestParam(name="page", defaultValue = "0")int page, 
 			@RequestParam(name="size", defaultValue = "5")int size){
-		model.addAttribute("codeCompte", codeCompte);
+		model.addAttribute("id_compte", id_compte);
 		try {
-			Optional<Compte> cp = banqueMetier.consulterCompteM1(codeCompte);
+			Optional<Compte> cp = banqueMetier.consulterCompteM1(id_compte);
 			
 			
-			Compte c = banqueMetier.consulterCompte(codeCompte);
-			Page<Operation> pageOperation = banqueMetier.listOperation(codeCompte, page, size);
+			Compte c = banqueMetier.consulterCompte(id_compte);
+			Page<Operation> pageOperation = banqueMetier.listOperation(id_compte, page, size);
 			
 			//Page<Operation> pageOperation = operationRepository.findAll(PageRequest.of(page, size));
 			int[] pages = new int[pageOperation.getTotalPages()];
@@ -71,24 +71,24 @@ public class BanqueController {
 	}
 	@RequestMapping(value="/saveOperation", method=RequestMethod.POST)
 	public String saveOperation(Model model, String typeOperation, 
-			String codeCompte, double montant, String codeCompte2) {
+			String id_compte, double montant, String id_compte2) {
 
 		try {
 			if (typeOperation.equals("VERS")){
-				banqueMetier.verser(codeCompte, montant);
+				banqueMetier.verser(id_compte, montant);
 			}
 			else if(typeOperation.equals("RETR")){
-				banqueMetier.retirer(codeCompte, montant);		
+				banqueMetier.retirer(id_compte, montant);		
 			}
 			else if(typeOperation.equals("VIR")) {
-				banqueMetier.virement(codeCompte, codeCompte2, montant);
+				banqueMetier.virement(id_compte, id_compte2, montant);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			model.addAttribute("error", e);
-			return "redirect:/consulter?codeCompte="+codeCompte+"&error="+e.getMessage();
+			return "redirect:/consulter?id_compte="+id_compte+"&error="+e.getMessage();
 		}
-		return "redirect:/consulter?codeCompte="+codeCompte;
+		return "redirect:/consulter?id_compte="+id_compte;
 	}
 	
 	@RequestMapping("/AddCompte")
@@ -98,13 +98,13 @@ public class BanqueController {
 	}
 	
 	@RequestMapping(value="/saveCompte", method=RequestMethod.POST)
-	public String saveCompte(String codeCompte, String mailCompte,
+	public String saveCompte(String id_compte, String mailCompte,
 			String nomCompte, String soldeCompte, String typeCompte){
 		
 		double solde = Double.parseDouble(soldeCompte);
 		Client cl = clientRepository.save(new Client(nomCompte,mailCompte));
 
-		return "redirect:/consulter?codeCompte="+codeCompte;
+		return "redirect:/consulter?id_compte="+id_compte;
 	}
 	
 	@RequestMapping("/ListComptes")

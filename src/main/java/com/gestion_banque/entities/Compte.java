@@ -1,8 +1,10 @@
 package com.gestion_banque.entities;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -25,6 +27,9 @@ public class Compte implements Serializable{
 	@ManyToOne
 	  private Client client;
 	
+	@JsonIgnore
+	@OneToMany(mappedBy = "compte",fetch = FetchType.EAGER)
+	  private Collection<Operation> operation = new ArrayList<>();
 
 	public int getRib() {
 		return rib;

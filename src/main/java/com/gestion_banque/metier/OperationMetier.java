@@ -25,7 +25,7 @@ public interface OperationMetier {
 
     // pages oprations contient compte , pages , nbre de ligne
 
-    public PageOperation getOperations( String codeCompte, int page, int size );
+    public PageOperation getOperations( String id_compte, int page, int size );
     
     public Page<Operation> listOperation(String codecpte, int page, int size);
     
