@@ -53,7 +53,7 @@ public void setComptes(Collection<Compte> comptes) {
 }
 
 @ManyToOne
-  @JoinColumn(name = "agent_id_agent")
+  @JoinColumn(name = "agent")
   private Agent agent;
   
   @OneToMany(mappedBy = "client",fetch = FetchType.EAGER)
