@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
+<head>
+<title>Banque</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<header>
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">Banque2020V°4</a>
+				</div>
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Recherche</a></li>
+					<li><a th:href="@{/AddCompte}">Agences</a></li>
+					<li><a th:href="@{/consulterCompte}">Comptes</a></li>
+					<li><a th:href="@{/ListComptes}">Employés</a></li>
+					<li><a th:href="@{/ListComptes}">opérations</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a th:href="@{/login?logout}">Logout</a></li>
+
+				</ul>
+			</div>
+		</nav>
+	</header>
+	<section layout:fragment="content">
+		<div layout:fragment="content">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="panel panel-primary">
+					<div class="panel-heading">Problème d'autorisation</div>
+					<div class="panel-body">
+						<div><font color="red">Sorry you don't have access to this resource, please try again</font></div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</section>
+	<footer>
+		<div class="navbar-fixed-bottom">
+			<small>@CopyRight2020 by Ensa Safi</small>
+		</div>
+	</footer>
+
+</body>
+</html>
