@@ -28,27 +28,34 @@ public class CompteRestRepository {
 	ClientRepository clientRep;
 	
 	
-	@RequestMapping(value = "/getClientComptes/{id}", method =RequestMethod.GET)
-	public Collection<Compte> getClientComptes(String id){
-		Client c = clientRep.findById(id).orElse(null);
-		if(c != null)
-			return c.getComptes();
+	@PostMapping("/getClientComptes")
+	public Collection<Compte> getClientComptes(@RequestBody Client client){
+		Client c = clientRep.findById(client.getId_client()).orElse(null);
+		if(c != null) {
+			return c.getComptes();}
 		else
 			return null;
 	}
 	
-	@PostMapping("/VerserSolde")
-	public Object verserSolde(@RequestBody Compte c){
-		String id = c.getId_Compte();
-		double solde = c.getSolde();
-		Compte myCompte = compteRep.findById(id).orElse(null);
-		
+	@PostMapping("/verserSolde")
+	public Object verserSolde(@RequestBody Compte compte){
+		System.out.print("verser done");
+		double rib = compte.getRib();
+		double solde = compte.getSolde();
 		try {
+			List<Compte> comptes =  compteRep.findByRib(rib);
+			Compte myCompte = comptes.get(0);
 			myCompte.setSolde(myCompte.getSolde() + solde);
-			return "success";
+			compteRep.save(myCompte);
+			System.out.print("success");
+			System.out.print(rib);
+
+			return myCompte;
+			
 		}
 		catch(Exception e) {
-			return "error";
+			System.out.print(e.toString());
+			return null;
 		}
 			
 	}
