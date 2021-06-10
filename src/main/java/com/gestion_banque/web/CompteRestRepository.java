@@ -32,7 +32,6 @@ public class CompteRestRepository {
 	public Collection<Compte> getClientComptes(@RequestBody Client client){
 		Client c = clientRep.findById(client.getId_client()).orElse(null);
 		if(c != null) {
-			System.out.print("entred");
 			return c.getComptes();}
 		else
 			return null;
