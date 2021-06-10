@@ -4,10 +4,12 @@ import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,14 +39,15 @@ public class CompteRestRepository {
 			return null;
 	}
 	
-	@PostMapping("/VerserSolde")
-	public Object verserSolde(@RequestBody Compte c){
+	@PostMapping("/rechargeTel/{id}")
+	public Object rechargeTel(@RequestBody Compte c , int m){
+		
 		String id = c.getId_compte();
 		double solde = c.getSolde();
 		Compte myCompte = compteRep.findById(id).orElse(null);
 		
 		try {
-			myCompte.setSolde(myCompte.getSolde() + solde);
+			myCompte.setSolde(myCompte.getSolde() - m);
 			return "success";
 		}
 		catch(Exception e) {
@@ -52,6 +55,41 @@ public class CompteRestRepository {
 		}
 			
 	}
+
+	
+	@PostMapping("/VerserSolde/{id}")
+	public Object verserSolde(@RequestBody Compte c1 , Compte c2){
+		String id1 = c1.getId_compte();
+		String id = c2.getId_compte();
+		double solde1 = c1.getSolde();
+		double solde2 = c2.getSolde();
+		Compte myCompte = compteRep.findById(id1).orElse(null);
+		Compte myCompteper = compteRep.findById(id).orElse(null);
+		
+		try {
+			myCompte.setSolde(myCompte.getSolde() - solde1);
+			myCompteper.setSolde(myCompteper.getSolde() + solde2);
+			return "success";
+		}
+		catch(Exception e) {
+			return "error";
+		}
+			
+	}
+	
+	@PutMapping("/UpdateComptes/{id}")
+	public ResponseEntity<Client> updateTutorial(@PathVariable(value = "id") String id_client,
+		   @RequestBody Client clientDetails)  {
+		  
+		   Client clt = new Client();
+	
+		   clt.setEmail(clientDetails.getEmail());
+	       clt.setMdp(clientDetails.getMdp());
+	        
+	       final Client updatedClient = clientRep.save(clt);
+	       return ResponseEntity.ok(updatedClient);
+	  }
+	
 	
 	@PostMapping("/SaveCompte")
 	public void SaveClients(@RequestBody Compte c){
