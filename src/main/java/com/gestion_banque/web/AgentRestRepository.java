@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gestion_banque.dao.AgentRespository;
-
+import com.gestion_banque.dao.ClientRepository;
 import com.gestion_banque.entities.Agent;
 import com.gestion_banque.entities.Client;
 
@@ -24,15 +24,17 @@ public class AgentRestRepository {
 	@Autowired
 	private AgentRespository agentRep;
 	
+	@Autowired
+	private ClientRepository clientRep;
+	
 	
 	
 	@RequestMapping(value = "/getAgentClients", method =RequestMethod.GET)
 	public Collection<Client> getAgentClient(@RequestParam String id){
 		System.out.println("gotClients mzian");
 		try {
-		Agent a = agentRep.findById(id).orElse(null);
-		
-		return a.getClients();
+		//Agent a = agentRep.findById(id).orElse(null);
+		return clientRep.FindClients(id);
 		}
 		catch(Exception e) {
 			return null;

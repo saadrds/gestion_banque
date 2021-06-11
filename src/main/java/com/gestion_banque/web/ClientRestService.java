@@ -1,5 +1,8 @@
 package com.gestion_banque.web;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +40,8 @@ public class ClientRestService {
 	@PostMapping("/SaveClient")
 	public Object SaveClients(@RequestBody Client c){
 		try{
+			DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+			c.setDateCreation(df.parse(LocalDate.now().toString()));
 			clientRep.save(c);
 			return c;
 		}
@@ -66,6 +71,13 @@ public class ClientRestService {
 			return null;
 		}
 		else return clients.get(0);
+			
+	}
+	
+	@PostMapping("/getClientByPost")
+	public Object getClientByPost(@RequestBody String id){
+		Client client = clientRep.findById(id).orElse(null);
+		return client;
 			
 	}
 	

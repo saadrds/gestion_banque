@@ -2,6 +2,7 @@ package com.gestion_banque.web;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -25,6 +26,7 @@ import com.gestion_banque.dao.OperationRepository;
 import com.gestion_banque.entities.Client;
 import com.gestion_banque.entities.Compte;
 import com.gestion_banque.entities.Operation;
+import com.gestion_banque.entities.Versement;
 import com.gestion_banque.entities.objectVersement;
 
 @CrossOrigin("*")
@@ -45,7 +47,7 @@ public class CompteRestRepository {
 		Client c = clientRep.findById(client.getId_client()).orElse(null);
 		System.out.print(c);
 		if(c != null) {
-			return c.getComptes();}
+			return compteRep.FindComptes(client.getId_client());}
 		else
 			return null;
 	}
@@ -83,12 +85,11 @@ public class CompteRestRepository {
 			Compte myCompte = comptes.get(0);
 			myCompte.setSolde(myCompte.getSolde() + solde);
 			compteRep.save(myCompte);
-			DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-			Operation operation = new Operation();
+			Operation operation = new Versement();
 			operation.setCompte(myCompte);
 			operation.setMontant(solde);
 			
-			operation.setDateOperation(df.parse(new Date().toString()));
+			operation.setDateOperation(new Date());
 			operationRep.save(operation);
 			System.out.print("success");
 			System.out.print(rib);
@@ -148,15 +149,16 @@ public class CompteRestRepository {
 	
 	@PostMapping("/SaveCompte")
 	public void SaveClients(@RequestBody Compte c){
+	
 		compteRep.save(c);
 	}
 	
-	@DeleteMapping(value = "/DeleteCompte?id={id}")
+	@DeleteMapping("/deleteCompte/{id}")
 	public void deleteComptet(@PathVariable String id) {
 		compteRep.deleteById(id);
 	}
 	
-	@PostMapping("/getClientComptesid	")
+	@PostMapping("/getClientComptesid")
 	public Collection<Compte> getClientComptesid(@RequestBody String id){
 		
 		Client c = clientRep.findById(id).orElse(null);
@@ -166,6 +168,17 @@ public class CompteRestRepository {
 		else
 			return null;
 	}
+	
+	@PostMapping("/getOperationsByRib")
+	public List<Operation> getOperationsByRib(@RequestBody String rib){
+		Compte c = compteRep.findByRib(Integer.parseInt(rib)).get(0);
+		List<Operation> operations = operationRep.findByCompte(c.getId_compte());
+		if(operations.isEmpty()) {
+			return null;}
+		else
+			return operations;
+	}
+
 	
 	
 
