@@ -1,5 +1,7 @@
 package com.gestion_banque.web;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -81,10 +83,12 @@ public class CompteRestRepository {
 			Compte myCompte = comptes.get(0);
 			myCompte.setSolde(myCompte.getSolde() + solde);
 			compteRep.save(myCompte);
+			DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 			Operation operation = new Operation();
 			operation.setCompte(myCompte);
 			operation.setMontant(solde);
-			operation.setDateOperation(new Date());
+			
+			operation.setDateOperation(df.parse(new Date().toString()));
 			operationRep.save(operation);
 			System.out.print("success");
 			System.out.print(rib);
