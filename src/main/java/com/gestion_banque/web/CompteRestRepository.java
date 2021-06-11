@@ -20,6 +20,7 @@ import com.gestion_banque.dao.ClientRepository;
 import com.gestion_banque.dao.CompteRespository;
 import com.gestion_banque.entities.Client;
 import com.gestion_banque.entities.Compte;
+import com.gestion_banque.entities.objectVersement;
 
 @CrossOrigin("*")
 @RestController
@@ -31,54 +32,85 @@ public class CompteRestRepository {
 	ClientRepository clientRep;
 	
 	
-	@RequestMapping(value = "/getClientComptes/{id}", method =RequestMethod.GET)
-	public Collection<Compte> getClientComptes(String id){
-		Client c = clientRep.findById(id).orElse(null);
-		if(c != null)
-			return c.getComptes();
+	@PostMapping("/getClientComptes")
+	public Collection<Compte> getClientComptes(@RequestBody Client client){
+		Client c = clientRep.findById(client.getId_client()).orElse(null);
+		System.out.print(c);
+		if(c != null) {
+			return c.getComptes();}
 		else
 			return null;
 	}
 	
+
 	@PostMapping("/rechargeTel/{id}")
 	public Object rechargeTel(@RequestBody Compte c , int m){
 		
 		String id = c.getId_compte();
+		
 		double solde = c.getSolde();
+		
 		Compte myCompte = compteRep.findById(id).orElse(null);
+		
+		
+		if(solde>m) {
+			myCompte.setSolde(solde - m);
+			compteRep.save(myCompte);
+			return myCompte;
+		}else {
+			return "solde insuffisant";
+		}
 		/*
 		Compte myCompte = compteRep.findById(id_client).orElse(null);
 		double mm = myCompte.getSolde();
 		*/
-		try {
-			if(solde>m){
-			     myCompte.setSolde(myCompte.getSolde() - m);
-			} else {
-				return "Solde insuffisant";
-			}
-			return "success";
+	}
+	@PostMapping("/verserSolde")
+	public Object verserSolde(@RequestBody Compte compte){
+		System.out.print("verser done");
+		double rib = compte.getRib();
+		double solde = compte.getSolde();
+			try {
+			List<Compte> comptes =  compteRep.findByRib(rib);
+			Compte myCompte = comptes.get(0);
+			myCompte.setSolde(myCompte.getSolde() + solde);
+			compteRep.save(myCompte);
+			System.out.print("success");
+			System.out.print(rib);
+
+			return myCompte;
+			
 		}
 		catch(Exception e) {
-			return "error";
+			System.out.print(e.toString());
+			return null;
 		}
 			
 	}
 
 	
-	@PostMapping("/VerserSolde/{id}")
-	public Object verserSolde(@RequestBody Compte c1 , Compte c2 , double m){
-		String id1 = c1.getId_compte();
-		String id = c2.getId_compte();
-		double solde1 = c1.getSolde();
-		double solde2 = c2.getSolde();
-		Compte myCompte = compteRep.findById(id1).orElse(null);
-		Compte myCompteper = compteRep.findById(id).orElse(null);
+	@PostMapping("/VerserSoldeClient/{id}")
+	public Object verserSoldeClient(@RequestBody Compte c1 , double rib , double m){
+		
 		
 		try {
+			
+			String id1 = c1.getId_compte();
+			Compte c2 = compteRep.findByRib(rib).get(0);
+			String id = c2.getId_compte();
+			double solde1 = c1.getSolde();
+			double solde2 = c2.getSolde();
+			Compte myCompte = compteRep.findById(id1).orElse(null);
+			Compte myCompteper = compteRep.findById(id).orElse(null);
 			myCompte.setSolde(myCompte.getSolde() - m);
 			myCompteper.setSolde(myCompteper.getSolde() + m);
+			
+			
+			objectVersement ob = new objectVersement(c1,rib,m);
+			
 			return "success";
 		}
+		
 		catch(Exception e) {
 			return "error";
 		}
@@ -107,6 +139,17 @@ public class CompteRestRepository {
 	@DeleteMapping(value = "/DeleteCompte?id={id}")
 	public void deleteComptet(@PathVariable String id) {
 		compteRep.deleteById(id);
+	}
+	
+	@PostMapping("/getClientComptesid	")
+	public Collection<Compte> getClientComptesid(@RequestBody String id){
+		
+		Client c = clientRep.findById(id).orElse(null);
+		System.out.print(c);
+		if(c != null) {
+			return c.getComptes();}
+		else
+			return null;
 	}
 	
 	

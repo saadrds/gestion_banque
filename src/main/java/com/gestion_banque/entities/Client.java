@@ -53,7 +53,7 @@ public void setComptes(Collection<Compte> comptes) {
 }
 
 @ManyToOne
-  @JoinColumn(name = "agent_id_agent")
+  @JoinColumn(name = "agent")
   private Agent agent;
   
   @OneToMany(mappedBy = "client",fetch = FetchType.EAGER)
@@ -78,6 +78,14 @@ public Client(String prenom, String nom, String cin, String mdp, String email, S
 	this.tel = tel;
 	this.dateCreation = dateCreation;
 	this.agent = agent;
+}
+
+
+
+public Client(String nom, String email) {
+	super();
+	this.nom = nom;
+	this.email = email;
 }
 
 
@@ -135,4 +143,5 @@ public String getEmail() {
 public void setEmail(String email) {
 	this.email = email;
 }
+
 }
