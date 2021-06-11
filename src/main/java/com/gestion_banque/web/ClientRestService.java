@@ -3,12 +3,15 @@ package com.gestion_banque.web;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gestion_banque.dao.ClientRepository;
@@ -43,8 +46,8 @@ public class ClientRestService {
 		
 	}
 	
-	@RequestMapping(value = "/getClient/{id}", method =RequestMethod.GET)
-	public Client getClient(@PathVariable String id){
+	@RequestMapping(value = "/getClient", method =RequestMethod.GET)
+	public Client getClient(@RequestParam String id){
 		return clientRep.findById(id).orElse(null);
 	}
 	
@@ -52,4 +55,22 @@ public class ClientRestService {
 	public List<Compte> getAllComptes(){
 		return compteRep.findAll();
 	}
+	
+	@PostMapping("/loginClient")
+	public Object loginAgent(@RequestBody Client a){
+		String email = a.getEmail();
+		String mdp = a.getMdp();
+		List<Client> clients = clientRep.findByEmailAndPassword(email, mdp);
+		if(clients.isEmpty())
+		{
+			return null;
+		}
+		else return clients.get(0);
+			
+	}
+	
+	
+	
+	
+	
 }
