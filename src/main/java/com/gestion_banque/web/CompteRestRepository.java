@@ -1,6 +1,7 @@
 package com.gestion_banque.web;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.gestion_banque.dao.ClientRepository;
 import com.gestion_banque.dao.CompteRespository;
+import com.gestion_banque.dao.OperationRepository;
 import com.gestion_banque.entities.Client;
 import com.gestion_banque.entities.Compte;
+import com.gestion_banque.entities.Operation;
 
 @CrossOrigin("*")
 @RestController
@@ -26,6 +29,9 @@ public class CompteRestRepository {
 	
 	@Autowired
 	ClientRepository clientRep;
+	
+	@Autowired
+	OperationRepository operationRep;
 	
 	
 	@PostMapping("/getClientComptes")
@@ -47,6 +53,11 @@ public class CompteRestRepository {
 			Compte myCompte = comptes.get(0);
 			myCompte.setSolde(myCompte.getSolde() + solde);
 			compteRep.save(myCompte);
+			Operation operation = new Operation();
+			operation.setCompte(myCompte);
+			operation.setMontant(solde);
+			operation.setDateOperation(new Date());
+			operationRep.save(operation);
 			System.out.print("success");
 			System.out.print(rib);
 

@@ -17,7 +17,7 @@ import javax.persistence.ManyToOne;
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="TYPE_OP",discriminatorType=DiscriminatorType.STRING,length=1)
-public abstract class Operation implements Serializable{
+public class Operation implements Serializable{
 @Id @GeneratedValue (strategy = GenerationType.IDENTITY)
 private Long numero;
 private Date dateOperation;
