@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.origin.SystemEnvironmentOrigin;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -45,9 +46,16 @@ public class CompteRestRepository {
 		String id = c.getId_compte();
 		double solde = c.getSolde();
 		Compte myCompte = compteRep.findById(id).orElse(null);
-		
+		/*
+		Compte myCompte = compteRep.findById(id_client).orElse(null);
+		double mm = myCompte.getSolde();
+		*/
 		try {
-			myCompte.setSolde(myCompte.getSolde() - m);
+			if(solde>m){
+			     myCompte.setSolde(myCompte.getSolde() - m);
+			} else {
+				return "Solde insuffisant";
+			}
 			return "success";
 		}
 		catch(Exception e) {
@@ -58,7 +66,7 @@ public class CompteRestRepository {
 
 	
 	@PostMapping("/VerserSolde/{id}")
-	public Object verserSolde(@RequestBody Compte c1 , Compte c2){
+	public Object verserSolde(@RequestBody Compte c1 , Compte c2 , double m){
 		String id1 = c1.getId_compte();
 		String id = c2.getId_compte();
 		double solde1 = c1.getSolde();
@@ -67,8 +75,8 @@ public class CompteRestRepository {
 		Compte myCompteper = compteRep.findById(id).orElse(null);
 		
 		try {
-			myCompte.setSolde(myCompte.getSolde() - solde1);
-			myCompteper.setSolde(myCompteper.getSolde() + solde2);
+			myCompte.setSolde(myCompte.getSolde() - m);
+			myCompteper.setSolde(myCompteper.getSolde() + m);
 			return "success";
 		}
 		catch(Exception e) {
