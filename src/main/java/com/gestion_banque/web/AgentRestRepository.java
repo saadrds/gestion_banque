@@ -51,5 +51,18 @@ public class AgentRestRepository {
 		else return agents.get(0);
 			
 	}
+	
+	@PostMapping("/findAgent")
+	public Object findAgent(@RequestBody Agent a){
+		String id = a.getId_Agent();
+		System.out.print("cc");
+		Agent agent = agentRep.findById(id).orElse(null);
+		if(agent == null)
+		{
+			return null;
+		}
+		else return agent;
+			
+	}
 
 }
